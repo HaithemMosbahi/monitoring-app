@@ -20,11 +20,12 @@ export class MonitoringEffects {
 
     constructor(private actions$: Actions, private measurementService: MeasurementService) { }
 
-
+    @Effect()
     loadMeasurement$ = this.actions$
         .ofType(monitoringActions.LOAD_DATA)
+        .delay(2000)
         .map((action: monitoringActions.LoadData) => action.payload)
-        .mergeMap(pyload => this.measurementService.getWeightMeasurement())
+        .mergeMap(pyload => this.measurementService.getMeasurements())
         .map(measurements => new monitoringActions.LoadDataSuccess(measurements))
         .catch((err) => of(new monitoringActions.LoadDataFail({ error: err.message })));
 }

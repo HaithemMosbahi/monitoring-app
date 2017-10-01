@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-catalog-root',
+    selector: 'app-monitoring-root',
     template: `
-        Monitoring module works !
-        <div class="row">
-        <div class="col-md-6">
-          <div style="display: block;">
-          <app-weight-chart></app-weight-chart>          
-          </div>
-        </div>
-        </div>
+        <app-monitoring-container></app-monitoring-container>
     `
 })
 
