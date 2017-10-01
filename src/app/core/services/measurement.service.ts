@@ -9,6 +9,11 @@ export class MeasurementService {
 
     constructor(private http: Http) { }
 
+    getMeasurements(): Observable<any> {
+        return this.http.get('assets/data.json').map(response => response.json());
+
+    }
+
     getWeightMeasurement(): Observable<any> {
         return this.http.get('assets/data.json').map(response => response.json().weight);
     }

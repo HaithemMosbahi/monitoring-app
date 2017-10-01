@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-root',
     template: `
        <app-logo></app-logo>
+       <app-user-avatar></app-user-avatar>
         <app-menu>
         </app-menu>
         <router-outlet></router-outlet>

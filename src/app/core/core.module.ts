@@ -1,3 +1,5 @@
+import { UserAvatarComponent } from './components/user-avatar.component';
+import { AvatarModule } from 'ngx-avatar';
 import { MeasurementService } from './services/measurement.service';
 import { PageNotFoundComponent } from './containers/page-not-found.component';
 import { FooterComponent } from './components/footer.component';
@@ -12,10 +14,11 @@ import { LogoComponent } from "./components/logo.component";
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    AvatarModule
   ],
-  declarations: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent],
-  exports: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent]
+  declarations: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent,UserAvatarComponent],
+  exports: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent,UserAvatarComponent]
 })
 export class CoreModule {
   static forRoot() {
