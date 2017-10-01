@@ -4,6 +4,11 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-pain-chart',
   template: `
+  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-tile colspan="1">
+    Pain Level ( 1 - 10 )
+  </md-grid-tile>
+  <md-grid-tile colspan="3">
     <canvas  baseChart width="800" height="200"
         [datasets]="lineChartData"
         [labels]="lineChartLabels"
@@ -14,6 +19,11 @@ import * as moment from 'moment';
         (chartHover)="chartHovered($event)"
         (chartClick)="chartClicked($event)">
     </canvas>
+    </md-grid-tile>
+    <md-grid-tile colspan="1">
+    
+    </md-grid-tile>
+  </md-grid-list>
     `,
   styles: [
     `

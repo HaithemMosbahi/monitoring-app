@@ -4,6 +4,11 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-medication-chart',
   template: `
+  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-tile colspan="1">
+    Pain Level ( 1 - 10 )
+  </md-grid-tile>
+  <md-grid-tile colspan="3">
     <canvas baseChart width="800" height="100"
     [datasets]="lineChartData"
     [labels]="lineChartLabels"
@@ -11,11 +16,20 @@ import * as moment from 'moment';
     [chartType]="lineChartType"
     (chartHover)="chartHovered($event)"
     (chartClick)="chartClicked($event)"></canvas>
+    </md-grid-tile>
+    <md-grid-tile colspan="1">
+    
+    </md-grid-tile>
+  </md-grid-list>
     `,
   styles: [
     `
       canvas {
           display: inherit !important;
+      }
+
+      .circle {
+        backgournd-color:red;
       }
       `]
 })
@@ -33,9 +47,9 @@ export class MedicationChartComponent implements OnInit {
     this.lineChartData = [
 
       {
-        data: [null, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, null],
+        data: Object.values(this.data.data),
 
-        label: "My First dataset",
+        label: "Medication",
         backgroundColor: 'red',
         borderColor: 'red',
         fill: false,
@@ -44,7 +58,7 @@ export class MedicationChartComponent implements OnInit {
         showLine: false // no line shown
       }
     ];
-    this.lineChartLabels = [null, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, null];
+    this.lineChartLabels = Object.keys(this.data.data);
 
 
   }
@@ -56,8 +70,7 @@ export class MedicationChartComponent implements OnInit {
   public options: any = {
     responsive: false,
     title: {
-      display: true,
-      text: 'Point Style: circle'
+      display: false
     },
     legend: {
       display: false

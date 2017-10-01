@@ -4,19 +4,30 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-temperature-chart',
   template: `
-    <canvas  baseChart width="800" height="200"
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
-    </canvas>
+  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-tile colspan="1">
+    Body Temperature (C)
+  </md-grid-tile>
+  <md-grid-tile colspan="3">
+  <canvas  baseChart width="800" height="200"
+  [datasets]="lineChartData"
+  [labels]="lineChartLabels"
+  [options]="lineChartOptions"
+  [colors]="lineChartColors"
+  [legend]="lineChartLegend"
+  [chartType]="lineChartType"
+  (chartHover)="chartHovered($event)"
+  (chartClick)="chartClicked($event)">
+</canvas>
+  </md-grid-tile>
+  <md-grid-tile colspan="1">
+  
+  </md-grid-tile>
+</md-grid-list>
+   
     `,
-    styles:[
-      `
+  styles: [
+    `
       canvas {
           display: inherit !important;
       }

@@ -1,3 +1,4 @@
+import { MomentModule } from 'angular2-moment';
 import { PeriodComponent } from './components/period.component';
 import { PainChartComponent } from './components/pain-chart.component';
 import { SymptomsChartComponent } from './components/symptoms-chart.component';
@@ -27,7 +28,8 @@ import { reducers } from './reducers';
     MonitoringRoutingModule,
     StoreModule.forFeature('monitoring', reducers),
     EffectsModule.forFeature([MonitoringEffects]),
-    ChartsModule
+    ChartsModule,
+    MomentModule
 
   ],
   providers: [],

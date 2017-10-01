@@ -5,10 +5,13 @@ import { Component, OnInit } from '@angular/core';
 import * as monitoringActions from './../actions/monitoring.actions';
 import * as fromMonitoring from './../reducers';
 
+import * as moment from 'moment';
+
+
 @Component({
     selector: 'app-monitoring-container',
     template: `
-    <app-period (startHasChanged)="startHasChanged($event)"
+    <app-period [fromDate]="startDate" [toDate]="endDate" (startHasChanged)="startHasChanged($event)"
     (endHasChanged)="endHasChanged($event)" ></app-period>
     <div *ngIf="measurements$ | async as measurements" class="row">
     <div class="col-md-6">
@@ -24,10 +27,10 @@ import * as fromMonitoring from './../reducers';
   <div class="col-md-6">
   <div >
   <app-pain-chart [data]="measurements.pain" ></app-pain-chart>          
-  </div>
+  </div> </div>
   <div class="col-md-6">
   <div >
-  <app-medication-chart [data]="measurements.pain" ></app-medication-chart>          
+  <app-medication-chart [data]="measurements.medication" ></app-medication-chart>          
   </div>
 </div>
     </div>
@@ -36,6 +39,9 @@ import * as fromMonitoring from './../reducers';
     `,
     styles: [
         `
+        :host{
+            padding-top:30px;
+        }
         md-progress-spinner{
             margin:0 auto;
         }
@@ -50,6 +56,9 @@ export class MonitoringContainer implements OnInit {
     fromDate: Observable<any>;
     toDate: Observable<any>
 
+    startDate : any;
+    endDate: any;
+
     constructor(private store: Store<fromMonitoring.State>) {
         this.loading$ = this.store.select(fromMonitoring.getLoading);
         this.measurements$ = this.store.select(fromMonitoring.getMeasurementsData);
@@ -58,10 +67,12 @@ export class MonitoringContainer implements OnInit {
     }
 
     ngOnInit() {
-        let from = new Date();
-        let to = new Date().setDate(from.getDate() + 15);
+        let now = moment.now();
+        this.startDate =  moment(new Date(),'DD/MM/YYY').add(-15,'days').toISOString();
+        this.endDate = moment(new Date(),'DD/MM/YYY').toISOString();
+
         // dispatch load data action 
-        this.store.dispatch(new monitoringActions.LoadData({ from, to }));
+        this.store.dispatch(new monitoringActions.LoadData({ from:this.startDate, to:this.endDate }));
     }
 
 
@@ -71,6 +82,10 @@ export class MonitoringContainer implements OnInit {
 
     startHasChanged(newDate){
         console.log('period has changed '+newDate);
+    }
+
+    getFromDate(){
+        return new Date();
     }
     
     
