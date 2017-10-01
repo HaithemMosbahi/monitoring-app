@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-user-avatar',
     template: `
     <div class="user-avatar" [mdMenuTriggerFor]="menu" >
-    <ngx-avatar width="auto" height="auto" src="assets/img/avatar.png" ></ngx-avatar>
+    <img width="50"  src="assets/img/avatar.png" />
      <div> Miriam Schulte </div>
      </div>
       <md-menu #menu="mdMenu">
@@ -30,6 +30,10 @@ import { Component, OnInit } from '@angular/core';
             font-size: 16px !important;
             color: black;
             cursor: pointer;
+        }
+
+        img {
+            border-radius: 50%;
         }
        
         `

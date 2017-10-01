@@ -16,6 +16,7 @@ import { Component, OnInit } from '@angular/core';
     :host{
       margin-top:30px;
     }
+    
   `]
 })
 export class MenuComponent {
