@@ -1,0 +1,257 @@
+{
+    "weight": {
+        "data": {
+            "01/10": 55,
+            "02/10": 55,
+            "03/10": 55,
+            "04/10": 56,
+            "05/10": 56,
+            "06/10": 57,
+            "07/10": 59,
+            "08/10": 60,
+            "09/10": 60,
+            "10/10": 60,
+            "11/10": 60,
+            "12/10": 62,
+            "13/10": 62,
+            "14/10": 63,
+            "15/10": 63
+        },
+        "status": {}
+    },
+    "temperature": {
+        "data": {
+            "01/10": 37,
+            "02/10": 37,
+            "03/10": 37,
+            "04/10": 36.5,
+            "05/10": 36.5,
+            "06/10": 37,
+            "07/10": 37,
+            "08/10": 37.5,
+            "09/10": 38,
+            "10/10": 38.5,
+            "11/10": 38.5,
+            "12/10": 39,
+            "13/10": 39,
+            "14/10": 38,
+            "15/10": 38
+        },
+        "status": {}
+    },
+    "pain": {
+        "data": {
+            "01/10": 1,
+            "02/10": 1,
+            "03/10": 1,
+            "04/10": 1,
+            "05/10": 4,
+            "06/10": 5,
+            "07/10": 6,
+            "08/10": 6,
+            "09/10": 7,
+            "10/10": 8,
+            "11/10": 8,
+            "12/10": 7,
+            "13/10": 6,
+            "14/10": 5,
+            "15/10": 4
+        },
+        "status": {}
+    },
+    "diarrhea": {
+        "data": {
+            "01/10": {
+                "value": 1,
+                "description": "No Description"
+            },
+            "02/10": {
+                "value": 2,
+                "description": "No Description"
+            },
+            "03/10": {
+                "value": 1,
+                "description": "No Description"
+            },
+            "04/10": {
+                "value": 1,
+                "description": "No Description"
+            },
+            "05/10": {
+                "value": 4,
+                "description": "No Description"
+            },
+            "06/10": {
+                "value": 5,
+                "description": "No Description"
+            },
+            "07/10": {
+                "value": 6,
+                "description": "No Description"
+            },
+            "08/10": {
+                "value": 6,
+                "description": "No Description"
+            },
+            "09/10": {
+                "value": 6,
+                "description": "No Description"
+            },
+            "10/10": {
+                "value": 7,
+                "description": "No Description"
+            },
+            "11/10": {
+                "value": 8,
+                "description": "No Description"
+            },
+            "12/10": {
+                "value": 8,
+                "description": "No Description"
+            },
+            "13/10": {
+                "value": 8,
+                "description": "No Description"
+            },
+            "14/10": {
+                "value": 9,
+                "description": "No Description"
+            },
+            "15/10": {
+                "value": 9,
+                "description": "No Description"
+            }
+        },
+        "status": {}
+    },
+    "symptoms": {
+        "data": {
+            "01/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "02/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "03/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "04/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "05/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "06/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "07/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "08/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "09/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "10/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "11/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "12/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "13/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "14/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "15/10": {
+                "value": true,
+                "description": "No Description"
+            }
+        },
+        "status": {}
+    },
+    "medication": {
+        "data": {
+            "01/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "02/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "03/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "04/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "05/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "06/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "07/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "08/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "09/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "10/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "11/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "12/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "13/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "14/10": {
+                "value": true,
+                "description": "No Description"
+            },
+            "15/10": {
+                "value": true,
+                "description": "No Description"
+            }
+        },
+        "status": {}
+    }
+}
