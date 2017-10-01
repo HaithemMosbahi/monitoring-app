@@ -12,7 +12,9 @@ import {
     MdGridListModule,
     MdListModule,
     MdInputModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdNativeDateModule
 } from '@angular/material';
 
 @NgModule({
@@ -27,8 +29,9 @@ import {
     MdGridListModule,
     MdListModule,
     MdInputModule,
-    MdCheckboxModule
-    
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdNativeDateModule
   ],
   exports: [
     MdButtonModule,
@@ -41,7 +44,9 @@ import {
     MdGridListModule,
     MdListModule,
     MdInputModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdNativeDateModule 
   ]
 })
 export class MaterialModule {}
