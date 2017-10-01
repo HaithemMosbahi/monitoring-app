@@ -1,3 +1,5 @@
+import { MeasurementService } from './services/measurement.service';
+import { PageNotFoundComponent } from './containers/page-not-found.component';
 import { FooterComponent } from './components/footer.component';
 import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -12,14 +14,14 @@ import { LogoComponent } from "./components/logo.component";
     RouterModule,
     SharedModule
   ],
-  declarations: [MenuComponent,LogoComponent,FooterComponent],
-  exports: [MenuComponent,LogoComponent,FooterComponent]
+  declarations: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent],
+  exports: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent]
 })
 export class CoreModule {
   static forRoot() {
     return {
       ngModule: CoreModule,
-      providers: []
+      providers: [MeasurementService]
     }
   }
 }

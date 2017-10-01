@@ -5,16 +5,19 @@ export const LOAD_DATA_SUCCESS = '[Monitoring] Load Success';
 export const LOAD_DATA_FAIL = '[Monitoring] Load Fail';
 
 /**
- * Load Data Actions
+ * Load Data Action : the payload will contain the period ( from - to )
  */
 export class LoadData implements Action {
     readonly type = LOAD_DATA;
+    
+    constructor(public payload: any) { }
+    
 }
 
 export class LoadDataSuccess implements Action {
     readonly type = LOAD_DATA_SUCCESS;
 
-    constructor(public payload: any[]) { }
+    constructor(public payload: any) { }
 }
 
 export class LoadDataFail implements Action {

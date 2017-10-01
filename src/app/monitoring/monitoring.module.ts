@@ -1,4 +1,6 @@
-import { MonitoringRootComponent } from './containers/catalog-root.component';
+import { MonitoringRoutingModule } from './monitoring-routing.module';
+import { MonitoringRootComponent } from './containers/monitoring-root.component';
+import { WeightChartComponent } from './components/weight-chart.component';
 import { SharedModule } from './../shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -13,11 +15,12 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     SharedModule,
     HttpModule,
+    MonitoringRoutingModule
     //StoreModule.forFeature('monitoring', reducers),
     //EffectsModule.forFeature([MonitoringEffects])
 
   ],
   providers: [],
-  declarations: [MonitoringRootComponent]
+  declarations: [MonitoringRootComponent,WeightChartComponent]
 })
 export class MonitoringModule { }

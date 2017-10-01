@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-catalog-root',
+    selector: 'app-page-not-found',
     template: `
-        Monitoring module works !
+       404 Page not found
     `
 })
 
-export class MonitoringRootComponent implements OnInit {
+export class PageNotFoundComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }

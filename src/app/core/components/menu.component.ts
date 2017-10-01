@@ -21,7 +21,7 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent {
 
   routeLinks: any[];
-  activeLinkIndex = 0;
+  activeLinkIndex = 1;
   constructor(private router: Router) {
     this.routeLinks = [
       { label: 'Dashboard', link: '/dashboard' },
