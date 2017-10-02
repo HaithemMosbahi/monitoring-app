@@ -21,7 +21,7 @@ import * as moment from 'moment';
 </canvas>
   </md-grid-tile>
   <md-grid-tile colspan="1">
-  
+   Slight fever at > 38 
   </md-grid-tile>
 </md-grid-list>
    

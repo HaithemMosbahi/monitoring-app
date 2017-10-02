@@ -6,7 +6,7 @@ import * as moment from 'moment';
   template: `
   <md-grid-list cols="5" rowHeight="200px">
   <md-grid-tile colspan="1">
-    Pain Level ( 1 - 10 )
+    Medication compliance
   </md-grid-tile>
   <md-grid-tile colspan="3">
     <canvas baseChart width="800" height="100"
@@ -18,7 +18,7 @@ import * as moment from 'moment';
     (chartClick)="chartClicked($event)"></canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-    
+      100% medication compliance
     </md-grid-tile>
   </md-grid-list>
     `,

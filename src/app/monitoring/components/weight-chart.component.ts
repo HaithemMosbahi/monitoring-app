@@ -21,7 +21,7 @@ import * as moment from 'moment';
     </canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-    Status is 
+    Critical weight loss of > 5% 
     </md-grid-tile>
   </md-grid-list>
     `,
