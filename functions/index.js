@@ -1,6 +1,7 @@
 // TO DO : add cloud functions to generate monitoring data
 const functions = require('firebase-functions');
 const express = require('express');
+const ms = require('./measurements');
 
 const app = express()
 app.get("/api/hello", (request, response) => {
@@ -10,7 +11,9 @@ app.get("/api/hello", (request, response) => {
 app.get("/measurements", (request, response) => {
     const startDate = request.query.from;
     const endDate = request.query.to;
-    response.send(`Generate measurements from ${startDate} to ${endDate}`);
+    response.setHeader('Content-Type','application/json');
+    //response.send(`Generate measurements from ${startDate} to ${endDate} -- ${ms.measurements().message}`);
+    response.send(ms.measurements(startDate,endDate));
 });
 
 // export the api 
