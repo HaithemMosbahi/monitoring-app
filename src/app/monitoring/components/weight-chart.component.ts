@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { MeasurementData } from './../models/data';
+import { Component, OnInit, Input,OnChanges,SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-weight-chart',
-    template: `
+  selector: 'app-weight-chart',
+  template: `
     <md-grid-list cols="5" rowHeight="200px">
     <md-grid-tile colspan="1">
       <span>Weight ( Kg )</span>
@@ -15,49 +16,30 @@ import * as moment from 'moment';
         [options]="lineChartOptions"
         [colors]="lineChartColors"
         [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
+        [chartType]="lineChartType">
     </canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-    Critical weight loss of > 5% 
+    {{status}}
     </md-grid-tile>
   </md-grid-list>
     `,
-    styles:[
-        `
+  styles: [
+    `
         canvas {
             display: inherit !important;
         }
         `
-    ]
+  ]
 })
 
-export class WeightChartComponent implements OnInit {
+export class WeightChartComponent implements OnInit,OnChanges {
+  
+  @Input() measurements: MeasurementData;
 
-    @Input() data: any;
-
-    constructor() { }
-
-    ngOnInit() {
-
-        this.lineChartLabels = Object.keys(this.data.data);
-        this.lineChartData = [
-           {
-             data: Object.values(this.data.data),
-             label:'Series A',
-             xAxisID: 'axis1'
-           }
-        ];
-
-     }
-
-
-     // lineChart
-  public lineChartData: Array<any>;
-  public lineChartLabels;
-  public lineChartOptions: any = {
+  lineChartData: Array<any>;
+  lineChartLabels;
+  lineChartOptions: any = {
     responsive: false,
     legend: {
       display: false
@@ -69,7 +51,7 @@ export class WeightChartComponent implements OnInit {
         gridLines: {
           display: true,
           offsetGridLines: true
-          
+
         }
       }
       ],
@@ -78,13 +60,38 @@ export class WeightChartComponent implements OnInit {
           gridLines: {
             display: true,
             offsetGridLines: true
-            
+
           }
         }
       ]
     }
 
   };
+
+
+  constructor() { }
+
+  ngOnInit() {
+
+    this.lineChartLabels = Object.keys(this.measurements.data);
+    this.lineChartData = [
+      {
+        data: Object.values(this.measurements.data),
+        label: 'Series A',
+        xAxisID: 'axis1'
+      }
+    ];
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+     if(changes['measurements']){
+       //this.lineChartData[0].data = changes.measurements.currentValue;
+     }
+  }
+
+
+
 
 
 
@@ -129,31 +136,11 @@ export class WeightChartComponent implements OnInit {
     console.log(this.lineChartData.toString());
   }
 
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
 
-  public chartHovered(e: any): void {
-    console.log(e);
+  // we use getters to keep template clean
+  get status() {
+    return this.measurements.status.message;
   }
 
 
-  timeFormat = 'MM/DD';
-  newDate(days) {
-    return moment().add(days, 'd').toDate();
-  }
-  newDateString(days) {
-    return moment().add(days, 'd').format(this.timeFormat);
-  }
-  newTimestamp(days) {
-    return moment().add(days, 'd').unix();
-  }
-
-
-  getData(data,labels){
-     let result = [];
-     labels.forEach(label => result.push(data[label]));
-     return result;
-  }
 }

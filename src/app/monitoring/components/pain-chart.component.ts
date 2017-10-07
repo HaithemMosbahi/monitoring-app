@@ -21,7 +21,7 @@ import * as moment from 'moment';
     </canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-     Temporairly strong pain
+     {{data.status}}
     </md-grid-tile>
   </md-grid-list>
     `,

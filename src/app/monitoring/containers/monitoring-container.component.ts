@@ -16,7 +16,7 @@ import * as moment from 'moment';
     <div *ngIf="measurements$ | async as measurements" class="row">
     <div class="col-md-6">
       <div >
-      <app-weight-chart [data]="measurements.weight" ></app-weight-chart>          
+      <app-weight-chart [measurements]="measurements.weight" ></app-weight-chart>          
       </div>
     </div>
     <div class="col-md-6">
@@ -36,6 +36,8 @@ import * as moment from 'moment';
     </div>
     <md-progress-spinner *ngIf="loading$ | async" color="primary" mode="indeterminate" value="50">
     </md-progress-spinner>
+
+    
     `,
     styles: [
         `
@@ -56,7 +58,7 @@ export class MonitoringContainer implements OnInit {
     fromDate: Observable<any>;
     toDate: Observable<any>
 
-    startDate : any;
+    startDate: any;
     endDate: any;
 
     constructor(private store: Store<fromMonitoring.State>) {
@@ -68,25 +70,26 @@ export class MonitoringContainer implements OnInit {
 
     ngOnInit() {
         let now = moment.now();
-        this.startDate =  moment(new Date(),'DD/MM/YYY').add(-15,'days').toISOString();
-        this.endDate = moment(new Date(),'DD/MM/YYY').toISOString();
+        this.startDate = moment(new Date(), 'DD/MM/YYY').add(-15, 'days').toISOString();
+        this.endDate = moment(new Date(), 'DD/MM/YYY').toISOString();
 
         // dispatch load data action 
-        this.store.dispatch(new monitoringActions.LoadData({ from:this.startDate, to:this.endDate }));
+        this.store.dispatch(new monitoringActions.LoadData({ from: this.startDate, to: this.endDate }));
     }
 
 
-    endHasChanged(newDate){
-        console.log('period has changed '+newDate);
+    endHasChanged(newDate) {
+        console.log('period has changed ' + newDate);
     }
 
-    startHasChanged(newDate){
-        console.log('period has changed '+newDate);
+    startHasChanged(newDate) {
+        console.log('period has changed ' + newDate);
     }
 
-    getFromDate(){
+    getFromDate() {
         return new Date();
     }
     
-    
+
+
 }

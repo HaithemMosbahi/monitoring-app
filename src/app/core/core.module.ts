@@ -10,12 +10,15 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './components/menu.component';
 import { LogoComponent } from "./components/logo.component";
 
+
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     AvatarModule
+    
   ],
   declarations: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent,UserAvatarComponent],
   exports: [MenuComponent,LogoComponent,FooterComponent,PageNotFoundComponent,UserAvatarComponent]

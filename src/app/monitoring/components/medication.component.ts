@@ -18,7 +18,7 @@ import * as moment from 'moment';
     (chartClick)="chartClicked($event)"></canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-      100% medication compliance
+       {{data.status}}
     </md-grid-tile>
   </md-grid-list>
     `,
