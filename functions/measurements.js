@@ -11,10 +11,12 @@ exports.measurements = function (startDate, endDate) {
     // in case of invalid values the response should contains more details to 
     // inform the client that the given params are invalid 
     const result = {};
-    const rangeOfDates = helpers.rangeOfDates(startDate, endDate, format);
-    if (startDate && endDate && moment(startDate, format).isValid() && moment(endDate, format).isValid()) {
+    let rangeOfDates = [];
+    if (startDate && endDate) {
         let start = moment(startDate)
         let end = moment(endDate);
+        rangeOfDates = helpers.rangeOfDates(startDate, endDate, format);
+        
 
         result.weight = weightMeasurements(start, end);
         result.temperature = temperatureMeasurements(start, end);
