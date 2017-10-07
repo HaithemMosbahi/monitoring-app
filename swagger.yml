@@ -1,0 +1,22 @@
+paths:
+  /measurements:
+    get:
+      summary: Get Measurements for monitoring the health of a patient in a specific period
+      parameters:
+        - in: query
+          name: user
+          schema:
+            type: string
+          description: The identifier of the user 
+        - in: query
+          name: startDate
+          schema:
+            type: string
+            format: full-date
+          description: The start date 
+        - in: query
+          name: endDate
+          schema:
+            type: string
+            format: full-date # ISO8601 full-date YYYY-MM-DD
+          description: The end date 
