@@ -2,6 +2,7 @@
 // - Define the state interface and the initial state of monitoring module
 
 import * as monitoringActions from './../actions/monitoring.actions';
+import * as moment from 'moment';
 
 export interface State {
     measurements: any | null;
@@ -13,8 +14,8 @@ export interface State {
 // initial state of the monitoring module
 export const initialState: State = {
     measurements: null,
-    from: null,
-    to: null,
+    from: getInitialStartDate(),
+    to: getInitialEndDate(),
     loading: false
 }
 
@@ -22,13 +23,27 @@ export const initialState: State = {
 export function reducer(state = initialState, action: monitoringActions.ActionType) {
     switch (action.type) {
         case monitoringActions.LOAD_DATA:
-            return {...state, from: action.payload.from, to: action.payload.to, loading: true }
+            return { ...state, from: action.payload.from, to: action.payload.to, loading: true }
         case monitoringActions.LOAD_DATA_SUCCESS:
-            return {...state, measurements: action.payload, loading: false }
+            return { ...state, measurements: action.payload, loading: false }
         default:
             return state;
     }
 }
+
+// the initial start date is today minus 15 days
+export function getInitialStartDate() {
+    return moment(new Date(), 'DD/MM/YYYY').add(-15, 'days').toISOString();
+
+}
+
+// the Initial end date is today
+export function getInitialEndDate() {
+    return  moment(new Date(), 'DD/MM/YYYY').toISOString();
+
+}
+
+
 
 // reference to state properties
 export const getMeasurements = (state: State) => state.measurements;
