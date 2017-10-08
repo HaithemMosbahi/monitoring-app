@@ -127,7 +127,7 @@ exports.measurements = function (startDate, endDate) {
     }
 
     function diarrheaMeasurements(start, end) {
-        const randomDiarrhea = helpers.rangeOfNumbers(4, 7);
+        const randomDiarrhea = helpers.rangeOfNumbers(3, 7);
         const result = {
             "data": {},
             "status": {
