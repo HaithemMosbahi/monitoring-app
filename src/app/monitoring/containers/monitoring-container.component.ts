@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import * as monitoringActions from './../actions/monitoring.actions';
 import * as fromMonitoring from './../reducers';
+import * as fromMonitoringState from './../reducers/monitoring';
 
 import * as moment from 'moment';
 
@@ -68,37 +69,20 @@ export class MonitoringContainer implements OnInit {
     }
 
     ngOnInit() {
-        let now = moment.now();
-        this.startDate = moment(new Date(), 'DD/MM/YYYY').add(-15, 'days').toISOString();
-        this.endDate = moment(new Date(), 'DD/MM/YYYY').toISOString();
+        // Get initiat start and end dates from the initial state        
+        this.startDate = fromMonitoringState.getInitialStartDate();
+        this.endDate = fromMonitoringState.getInitialEndDate();
 
         // dispatch load data action 
         this.store.dispatch(new monitoringActions.LoadData({ from: this.startDate, to: this.endDate }));
     }
 
 
-    endHasChanged(newDate) {
-        console.log('period has changed ' + newDate);
-        console.log('Date with moment : ' + moment(newDate).format('MM/DD/YYYY'));
-        this.store.dispatch(new monitoringActions.LoadData({ from: this.startDate, to: this.endDate }));
-
-    }
-
-    startHasChanged(newDate) {
-        console.log('period has changed ' + newDate);
-    }
-
-    getFromDate() {
-        return new Date();
-    }
-
-
     dateRangeChanged(event) {
         let from = moment(event.start).format('MM/DD/YYYY');
         let to = moment(event.end).format('MM/DD/YYYY');
-        console.log(`load data for : ${from} - to - ${to} `);
+        // dispatch load data action when date range changes.
         this.store.dispatch(new monitoringActions.LoadData({ from, to }));
-
 
     }
 

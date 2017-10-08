@@ -14,13 +14,14 @@ export class MeasurementService {
 
     constructor(private http: Http) { 
         this.resourceUrl = environment.functions.app.url +'/'+serviceEndPoint;
-        this.fetchData('10/10/2017','11/11/2017').subscribe(data => {
+        /* this.fetchData('10/10/2017','11/11/2017').subscribe(data => {
             console.log('data '+JSON.stringify(data));
-        });
+        }); */
     }
 
-    getMeasurements(): Observable<any> {
-        return this.http.get('assets/data/measurements.json').map(response => response.json());
+    getMeasurements(from:string,to:string): Observable<any> {
+        return this.fetchData(from,to);
+        //return this.http.get('assets/data/measurements.json').map(response => response.json());
 
     }
 
@@ -40,7 +41,6 @@ export class MeasurementService {
         let queryParams: URLSearchParams = new URLSearchParams();
         queryParams.set('from', startDate);
         queryParams.set('to', endDate);
-        return this.http.get(this.resourceUrl,{params:queryParams}).map(response => response.json())
-                        .do(data => console.log(JSON.stringify(data)));
+        return this.http.get(this.resourceUrl,{params:queryParams}).map(response => response.json());
     }
 }

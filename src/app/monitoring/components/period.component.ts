@@ -6,7 +6,7 @@ import * as moment from 'moment';
     template: `
  
     <div>
-    Monitoring from {{startDate | amDateFormat:'LL' }}  to {{endDate | amDateFormat:'LL' }}
+    Monitoring from {{fromDate | amDateFormat:'LL' }}  to {{toDate | amDateFormat:'LL' }}
     </div>
     
     <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"
