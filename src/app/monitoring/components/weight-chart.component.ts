@@ -86,7 +86,8 @@ export class WeightChartComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
      if(changes['measurements']){
-       //this.lineChartData[0].data = changes.measurements.currentValue;
+       if(!changes.measurements.isFirstChange)
+         this.lineChartData[0].data = changes.measurements.currentValue.data;
      }
   }
 

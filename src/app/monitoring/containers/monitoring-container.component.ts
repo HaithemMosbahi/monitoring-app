@@ -11,8 +11,7 @@ import * as moment from 'moment';
 @Component({
     selector: 'app-monitoring-container',
     template: `
-    <app-period [fromDate]="startDate" [toDate]="endDate" (startHasChanged)="startHasChanged($event)"
-    (endHasChanged)="endHasChanged($event)" ></app-period>
+    <app-period [fromDate]="fromDate$ | async" [toDate]="toDate$ | async" (dateRangeChanged)="dateRangeChanged($event)" ></app-period>
     <div *ngIf="measurements$ | async as measurements" class="row">
     <div class="col-md-6">
       <div >
@@ -55,8 +54,8 @@ export class MonitoringContainer implements OnInit {
 
     loading$: Observable<boolean>;
     measurements$: Observable<any>;
-    fromDate: Observable<any>;
-    toDate: Observable<any>
+    fromDate$: Observable<any>;
+    toDate$: Observable<any>
 
     startDate: any;
     endDate: any;
@@ -64,14 +63,14 @@ export class MonitoringContainer implements OnInit {
     constructor(private store: Store<fromMonitoring.State>) {
         this.loading$ = this.store.select(fromMonitoring.getLoading);
         this.measurements$ = this.store.select(fromMonitoring.getMeasurementsData);
-        this.fromDate = this.store.select(fromMonitoring.getFromDate);
-        this.toDate = this.store.select(fromMonitoring.getToDate);
+        this.fromDate$ = this.store.select(fromMonitoring.getFromDate);
+        this.toDate$ = this.store.select(fromMonitoring.getToDate);
     }
 
     ngOnInit() {
         let now = moment.now();
-        this.startDate = moment(new Date(), 'DD/MM/YYY').add(-15, 'days').toISOString();
-        this.endDate = moment(new Date(), 'DD/MM/YYY').toISOString();
+        this.startDate = moment(new Date(), 'DD/MM/YYYY').add(-15, 'days').toISOString();
+        this.endDate = moment(new Date(), 'DD/MM/YYYY').toISOString();
 
         // dispatch load data action 
         this.store.dispatch(new monitoringActions.LoadData({ from: this.startDate, to: this.endDate }));
@@ -80,6 +79,9 @@ export class MonitoringContainer implements OnInit {
 
     endHasChanged(newDate) {
         console.log('period has changed ' + newDate);
+        console.log('Date with moment : ' + moment(newDate).format('MM/DD/YYYY'));
+        this.store.dispatch(new monitoringActions.LoadData({ from: this.startDate, to: this.endDate }));
+
     }
 
     startHasChanged(newDate) {
@@ -89,7 +91,17 @@ export class MonitoringContainer implements OnInit {
     getFromDate() {
         return new Date();
     }
-    
+
+
+    dateRangeChanged(event) {
+        let from = moment(event.start).format('MM/DD/YYYY');
+        let to = moment(event.end).format('MM/DD/YYYY');
+        console.log(`load data for : ${from} - to - ${to} `);
+        this.store.dispatch(new monitoringActions.LoadData({ from, to }));
+
+
+    }
+
 
 
 }
