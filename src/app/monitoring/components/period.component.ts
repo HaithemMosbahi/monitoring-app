@@ -9,7 +9,7 @@ import * as moment from 'moment';
     Monitoring from {{fromDate | amDateFormat:'LL' }}  to {{toDate | amDateFormat:'LL' }}
     </div>
     
-    <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"
+    <my-date-range-picker name="mydaterange" [options]="dateRangeOptions"
     [(ngModel)]="dateRangeModel" (dateRangeChanged)="onDateRangeChanged($event)" required></my-date-range-picker>
   
     `,
@@ -43,13 +43,19 @@ export class PeriodComponent implements OnInit {
     ngOnInit() {
         let from = moment(this.fromDate);
         let to = moment(this.toDate);
-        let beginDate = { year: from.year(), month: from.month() +1, day: from.date() };
+        let beginDate = { year: from.year(), month: from.month() + 1, day: from.date() };
         let endDate = { year: to.year(), month: to.month() + 1, day: to.date() };
         // construct date range model using shorthand object
         this.dateRangeModel = { beginDate, endDate }
 
     }
 
+    /**
+     * Fired when the date range has changed 
+     * 
+     * @param {any} event 
+     * @memberof PeriodComponent
+     */
     onDateRangeChanged(event) {
         this.dateRangeChanged.emit({ start: event.beginJsDate, end: event.endJsDate });
     }

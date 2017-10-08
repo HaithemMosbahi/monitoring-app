@@ -1,6 +1,7 @@
 import { MeasurementData } from './../models/data';
 import { Component, OnInit, Input,OnChanges,SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
+import * as utils from './chart-utils';
 
 @Component({
   selector: 'app-weight-chart',
@@ -36,38 +37,12 @@ import * as moment from 'moment';
 export class WeightChartComponent implements OnInit,OnChanges {
   
   @Input() measurements: MeasurementData;
-
+  lineChartLegend: boolean = true;
+  lineChartType: string = 'line';
+  lineChartColors = utils.chartColors;  
   lineChartData: Array<any>;
   lineChartLabels;
-  lineChartOptions: any = {
-    responsive: false,
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [{
-        id: 'axis1',
-        position: 'top',
-        gridLines: {
-          display: true,
-          offsetGridLines: true
-
-        }
-      }
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: true,
-            offsetGridLines: true
-
-          }
-        }
-      ]
-    }
-
-  };
-
+  lineChartOptions: any = utils.lineChartOptions(false,true,false,true);
 
   constructor() { }
 
@@ -93,54 +68,7 @@ export class WeightChartComponent implements OnInit,OnChanges {
        }
      }
   }
-
-
-
-
-
-
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
-
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
-    console.log(this.lineChartData.toString());
-  }
-
-
+  
   // we use getters to keep template clean
   get status() {
     return this.measurements.status.message;

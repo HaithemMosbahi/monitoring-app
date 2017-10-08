@@ -21,12 +21,12 @@ import * as moment from 'moment';
     </div>
     <div class="col-md-6">
     <div >
-    <app-temperature-chart [data]="measurements.temperature" ></app-temperature-chart>          
+    <app-temperature-chart [measurements]="measurements.temperature" ></app-temperature-chart>          
     </div>
   </div>
   <div class="col-md-6">
   <div >
-  <app-pain-chart [data]="measurements.pain" ></app-pain-chart>          
+  <app-pain-chart [measurements]="measurements.pain" ></app-pain-chart>          
   </div> </div>
   <div class="col-md-6">
   <div >
