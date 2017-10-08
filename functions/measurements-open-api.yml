@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Health Measurements
+  license:
+    name: MIT
+host: https://us-central1-health-monitoring-c4a62.cloudfunctions.net/app
+basePath: /app
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /measurements:
+    get:
+      summary: Get Measurements for monitoring the health of a patient in a specific period
+      parameters:
+        - in: query
+          name: user
+          schema:
+            type: string
+          description: The identifier of the user 
+        - in: query
+          name: startDate
+          schema:
+            type: string
+            format: full-date
+          description: The start date 
+        - in: query
+          name: endDate
+          schema:
+            type: string
+            format: full-date # ISO8601 full-date YYYY-MM-DD
+          description: The end date 
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Pets'
+          default:
+            description: unexpected error
+            schema:
+              $ref: '#/definitions/Error'
