@@ -1,148 +1,165 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-symptoms-chart',
   template: `
-    <canvas  baseChart width="800" height="200"
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
-    </canvas>
-    `,
+    <md-grid-list cols="5" rowHeight="100px">
+    <md-grid-tile colspan="1">
+      <b>Further symptoms</b>
+    </md-grid-tile>
+    <md-grid-tile colspan="3">
+      <canvas baseChart width="800" height="100"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="options"
+      [chartType]="lineChartType"></canvas>
+      </md-grid-tile>
+      <md-grid-tile colspan="1">
+         {{status}}
+      </md-grid-tile>
+    </md-grid-list>
+      `,
   styles: [
     `
-      canvas {
-          display: inherit !important;
-      }
-      `]
+        canvas {
+            display: inherit !important;
+        }
+  
+        .circle {
+          backgournd-color:red;
+        }
+  
+        .check-img {
+         color: yellow; 
+        }
+        `]
 })
-
-export class SymptomsChartComponent implements OnInit {
+export class SymptomsChartComponent implements OnInit, OnChanges {
 
   @Input() data: any;
+
 
   constructor() { }
 
   ngOnInit() {
+    let values = Object.values(this.data.data);
+    let chartData = values.map(val => 50);
+    let pointStyle = values.map(val => this._generateImage(val));
 
-    this.lineChartLabels = Object.keys(this.data.data);
+    // point chart
     this.lineChartData = [
       {
-        data: Object.values(this.data.data),
-        label: 'Series A',
-        xAxisID: 'axis1'
+        data: chartData,
+        backgroundColor: 'red',
+        borderColor: 'red',
+        fill: false,
+        pointStyle: pointStyle,
+        showLine: false // no line shown
       }
     ];
+    this.lineChartLabels = Object.keys(this.data.data);
 
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      if (!changes.data.isFirstChange()) {
+        this.lineChartLabels = Object.keys(changes.data.currentValue.data);
+        let values = Object.values(changes.data.currentValue.data);
+        let chartData = values.map(val => 50);
+        let pointStyle = values.map(val => this._generateImage(val));
+
+        this.lineChartData[0].data = chartData;
+        this.lineChartData[0].pointStyle = pointStyle;
+      }
+    }
   }
 
 
   // lineChart
   public lineChartData: Array<any>;
   public lineChartLabels;
-  public lineChartOptions: any = {
+  public options: any = {
     responsive: false,
+    title: {
+      display: false
+    },
     legend: {
-      display: true
+      display: false
+    },
+    elements: {
+      point: {
+        //pointStyle: 'sun'
+      }
     },
     scales: {
       xAxes: [{
         id: 'axis1',
+        display: true,
         position: 'top',
         gridLines: {
           display: true,
           offsetGridLines: true
 
+        },
+        ticks: {
+          display: false
         }
-      }
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: true,
-            offsetGridLines: true
+      }],
+      yAxes: [{
+        display: false,
+        gridLines: {
+          display: true,
+          offsetGridLines: true
 
-          }
+        },
+        ticks: {
+          display: false
         }
-      ]
+      }]
     }
+  }
 
-  };
-
-
-
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+
+  /**
+   * Generate image element based on the given value
+   * 
+   * @param {any} value 
+   * @returns 
+   * @memberof SymptomsChartComponent
+   */
+  _generateImage(value) {
+    if (typeof (value) === "boolean") {
+      if (value) {
+        return this._okImage();
+      } else {
+        return this._notOkImage();
       }
     }
-    this.lineChartData = _lineChartData;
-    console.log(this.lineChartData.toString());
   }
 
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+  _okImage() {
+    let img = new Image();
+    img.src = 'assets/img/charts/check_circle_24px.svg';
+    return img;
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
+  _notOkImage() {
+    let img = new Image();
+    img.src = 'assets/img/charts/close-circle.svg';
+    img.width = 24;
+    img.height = 24;
+    img.className = 'check-img';
+    img.setAttribute("style", "background-color:green;font-size:32px");
+    return img;
   }
 
-
-  timeFormat = 'MM/DD';
-  newDate(days) {
-    return moment().add(days, 'd').toDate();
-  }
-  newDateString(days) {
-    return moment().add(days, 'd').format(this.timeFormat);
-  }
-  newTimestamp(days) {
-    return moment().add(days, 'd').unix();
-  }
-
-
-  getData(data, labels) {
-    let result = [];
-    labels.forEach(label => result.push(data[label]));
-    return result;
+  get status() {
+    return this.data.status.message;
   }
 }

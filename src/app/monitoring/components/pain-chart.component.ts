@@ -1,16 +1,17 @@
 import { MeasurementData } from './../models/data';
-import { Component, OnInit, Input,OnChanges,SimpleChanges, } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, } from '@angular/core';
 import * as moment from 'moment';
 import * as utils from './chart-utils';
 @Component({
   selector: 'app-pain-chart',
   template: `
-  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-list cols="5" rowHeight="150px">
   <md-grid-tile colspan="1">
-    Pain Level ( 1 - 10 )
+  <span><b> Pain Level </b> <br/> ( 1 - 10 )</span>
+
   </md-grid-tile>
   <md-grid-tile colspan="3">
-    <canvas  baseChart width="800" height="200"
+    <canvas  baseChart width="800" height="150"
         [datasets]="lineChartData"
         [labels]="lineChartLabels"
         [options]="lineChartOptions"
@@ -34,15 +35,15 @@ import * as utils from './chart-utils';
       `]
 })
 
-export class PainChartComponent implements OnInit,OnChanges {
+export class PainChartComponent implements OnInit, OnChanges {
 
   @Input() measurements: MeasurementData;
   lineChartLegend: boolean = true;
   lineChartType: string = 'line';
-  lineChartColors = utils.chartColors;  
+  lineChartColors = utils.chartColors;
   lineChartData: Array<any>;
   lineChartLabels;
-  lineChartOptions: any = utils.lineChartOptions(false,true,false,false);
+  lineChartOptions: any = utils.lineChartOptions(false, true, false, false);
 
   constructor() { }
 
@@ -60,15 +61,15 @@ export class PainChartComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-     if(changes['measurements']){
-       if(!changes.measurements.isFirstChange()){
+    if (changes['measurements']) {
+      if (!changes.measurements.isFirstChange()) {
         this.lineChartLabels = Object.keys(changes.measurements.currentValue.data);
         this.lineChartData[0].data = Object.values(changes.measurements.currentValue.data);
-        
-       }
-     }
+
+      }
+    }
   }
-  
+
   // we use getters to keep template clean
   get status() {
     return this.measurements.status.message;

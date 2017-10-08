@@ -1,24 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-medication-chart',
   template: `
-  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-list cols="5" rowHeight="100px">
   <md-grid-tile colspan="1">
-    Medication compliance
+    <b>Medication compliance</b>
   </md-grid-tile>
   <md-grid-tile colspan="3">
     <canvas baseChart width="800" height="100"
     [datasets]="lineChartData"
     [labels]="lineChartLabels"
     [options]="options"
-    [chartType]="lineChartType"
-    (chartHover)="chartHovered($event)"
-    (chartClick)="chartClicked($event)"></canvas>
+    [chartType]="lineChartType"></canvas>
     </md-grid-tile>
     <md-grid-tile colspan="1">
-       {{data.status}}
+       {{status}}
     </md-grid-tile>
   </md-grid-list>
     `,
@@ -31,10 +29,14 @@ import * as moment from 'moment';
       .circle {
         backgournd-color:red;
       }
+
+      .check-img {
+       color: yellow; 
+      }
       `]
 })
 
-export class MedicationChartComponent implements OnInit {
+export class MedicationChartComponent implements OnInit,OnChanges {
 
   @Input() data: any;
 
@@ -42,17 +44,21 @@ export class MedicationChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let values = Object.values(this.data.data);
+    let chartData = values.map(val => 50);
+    let pointStyle = values.map(val => val ? this._okImage() : this._notOkImage());
 
     // point chart
     this.lineChartData = [
 
-      {
-        data: Object.values(this.data.data),
 
+      {
+        data: chartData,
         label: "Medication",
         backgroundColor: 'red',
         borderColor: 'red',
         fill: false,
+        pointStyle: pointStyle,
         pointRadius: 10,
         pointHoverRadius: 15,
         showLine: false // no line shown
@@ -62,6 +68,20 @@ export class MedicationChartComponent implements OnInit {
 
 
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['data']){
+      if(!changes.data.isFirstChange()){
+        this.lineChartLabels = Object.keys(changes.data.currentValue.data);        
+        let values = Object.values(changes.data.currentValue.data);
+        let chartData = values.map(val => 50);
+        let pointStyle = values.map(val => val ? this._okImage() : this._notOkImage());
+    
+       this.lineChartData[0].data = chartData;
+       this.lineChartData[0].pointStyle = pointStyle; 
+      }
+    }
+ }
 
 
   // lineChart
@@ -77,7 +97,7 @@ export class MedicationChartComponent implements OnInit {
     },
     elements: {
       point: {
-        pointStyle: 'circle'
+        //pointStyle: 'sun'
       }
     },
     scales: {
@@ -108,73 +128,28 @@ export class MedicationChartComponent implements OnInit {
     }
   }
 
-
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
+  _okImage() {
+    let img = new Image();
+    img.src = 'assets/img/charts/check_circle_24px.svg';
+    return img;
+  }
+
+  _notOkImage() {
+    let img = new Image();
+    img.src = 'assets/img/charts/close-circle.svg';
+    img.width = 24;
+    img.height = 24;
+    img.className = 'check-img';
+    img.setAttribute("style", "background-color:green;font-size:32px");
+    return img;
+  }
+
+    // we use getters to keep template clean
+    get status() {
+      return this.data.status.message;
     }
-    this.lineChartData = _lineChartData;
-    console.log(this.lineChartData.toString());
-  }
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-
-  timeFormat = 'MM/DD';
-  newDate(days) {
-    return moment().add(days, 'd').toDate();
-  }
-  newDateString(days) {
-    return moment().add(days, 'd').format(this.timeFormat);
-  }
-  newTimestamp(days) {
-    return moment().add(days, 'd').unix();
-  }
-
-
-  getData(data, labels) {
-    let result = [];
-    labels.forEach(label => result.push(data[label]));
-    return result;
-  }
+  
 }

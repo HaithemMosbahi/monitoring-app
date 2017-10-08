@@ -6,12 +6,12 @@ import * as utils from './chart-utils';
 @Component({
   selector: 'app-temperature-chart',
   template: `
-  <md-grid-list cols="5" rowHeight="200px">
+  <md-grid-list cols="5" rowHeight="150px">
   <md-grid-tile colspan="1">
-    Body Temperature (C)
+    <span><b> Body Temperature </b> <br/> (C)</span>
   </md-grid-tile>
   <md-grid-tile colspan="3">
-  <canvas  baseChart width="800" height="200"
+  <canvas  baseChart width="800" height="150"
     [datasets]="lineChartData"
     [labels]="lineChartLabels"
     [options]="lineChartOptions"

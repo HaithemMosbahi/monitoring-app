@@ -24,15 +24,30 @@ import * as moment from 'moment';
     <app-temperature-chart [measurements]="measurements.temperature" ></app-temperature-chart>          
     </div>
   </div>
+  
   <div class="col-md-6">
   <div >
   <app-pain-chart [measurements]="measurements.pain" ></app-pain-chart>          
   </div> </div>
+
+  <div class="col-md-6">
+  <div >
+  <app-diarrhea-chart [data]="measurements.diarrhea" ></app-diarrhea-chart>          
+  </div>
+</div>
+
+<div class="col-md-6">
+<div >
+<app-symptoms-chart [data]="measurements.symptoms" ></app-symptoms-chart>          
+</div>
+</div>
+
   <div class="col-md-6">
   <div >
   <app-medication-chart [data]="measurements.medication" ></app-medication-chart>          
   </div>
 </div>
+  
     </div>
     <md-progress-spinner *ngIf="loading$ | async" color="primary" mode="indeterminate" value="50">
     </md-progress-spinner>

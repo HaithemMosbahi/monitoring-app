@@ -6,12 +6,12 @@ import * as utils from './chart-utils';
 @Component({
   selector: 'app-weight-chart',
   template: `
-    <md-grid-list cols="5" rowHeight="200px">
+    <md-grid-list cols="5" rowHeight="150px">
     <md-grid-tile colspan="1">
-      <span>Weight ( Kg )</span>
+      <span> <b>Weight </b> <br/> ( Kg )</span>
     </md-grid-tile>
     <md-grid-tile colspan="3">
-    <canvas  baseChart width="800" height="200"
+    <canvas  baseChart width="800" height="150"
         [datasets]="lineChartData"
         [labels]="lineChartLabels"
         [options]="lineChartOptions"
@@ -48,7 +48,7 @@ export class WeightChartComponent implements OnInit,OnChanges {
 
   ngOnInit() {
 
-    this.lineChartLabels = Object.keys(this.measurements.data);
+    this.lineChartLabels = Object.keys(this.measurements.data).map(date => date.substr(0,2));
     this.lineChartData = [
       {
         data: Object.values(this.measurements.data),
@@ -62,7 +62,7 @@ export class WeightChartComponent implements OnInit,OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
      if(changes['measurements']){
        if(!changes.measurements.isFirstChange()){
-        this.lineChartLabels = Object.keys(changes.measurements.currentValue.data);
+        this.lineChartLabels = Object.keys(changes.measurements.currentValue.data).map(date => date.substr(0,2));
         this.lineChartData[0].data = Object.values(changes.measurements.currentValue.data);
         
        }
