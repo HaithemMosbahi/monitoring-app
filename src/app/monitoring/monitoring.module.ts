@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 import { PeriodComponent } from './components/period.component';
 import { PainChartComponent } from './components/pain-chart.component';
@@ -20,6 +21,10 @@ import { CommonModule } from '@angular/common';
 
 import { reducers } from './reducers';
 
+// Component for date range selection 
+import { MyDateRangePickerModule } from 'mydaterangepicker';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +34,9 @@ import { reducers } from './reducers';
     StoreModule.forFeature('monitoring', reducers),
     EffectsModule.forFeature([MonitoringEffects]),
     ChartsModule,
-    MomentModule
+    MomentModule,
+    MyDateRangePickerModule,
+    FormsModule
 
   ],
   providers: [],

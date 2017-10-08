@@ -16,6 +16,7 @@ import {AvatarModule} from 'ngx-avatar'
 import { environment } from '../environments/environment';
 
 import { MomentModule } from 'angular2-moment';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 
 import {
@@ -40,6 +41,7 @@ import { reducers, metaReducers } from "./core/reducers";
     CoreModule.forRoot(),
     MonitoringModule,
     HttpModule,
+    MyDateRangePickerModule,
 
     /**
      * ngrx store root 
