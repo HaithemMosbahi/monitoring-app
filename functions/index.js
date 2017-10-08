@@ -1,9 +1,11 @@
 // TO DO : add cloud functions to generate monitoring data
 const functions = require('firebase-functions');
 const express = require('express');
+const cors = require('cors');
 const ms = require('./measurements');
 
-const app = express()
+const app = express();
+app.use(cors());
 app.get("/api/hello", (request, response) => {
     response.send("Hello from Express on Firebase Functions!")
 });
