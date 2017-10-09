@@ -24,14 +24,14 @@ paths:
           description: The identifier of the user 
           required: false
         - in: query
-          name: startDate
+          name: from
           schema:
             type: string
             format: full-date # ISO8601 full-date MM/DD/YYYY
           description: The start date of the time frame
           required: true
         - in: query
-          name: endDate
+          name: to
           schema:
             type: string
             format: full-date # ISO8601 full-date MM/DD/YYYY
