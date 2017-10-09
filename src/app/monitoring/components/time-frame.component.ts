@@ -4,13 +4,14 @@ import * as moment from 'moment';
 @Component({
     selector: 'app-time-frame',
     template: `
- 
-    <div>
-    Monitoring from {{fromDate | amDateFormat:'LL' }}  to {{toDate | amDateFormat:'LL' }}
-    </div>
+         <div>
+            Monitoring from {{fromDate | amDateFormat:'LL' }}  to {{toDate | amDateFormat:'LL' }}
+         </div>
     
-    <my-date-range-picker name="mydaterange" [options]="dateRangeOptions"
-    [(ngModel)]="dateRangeModel" (dateRangeChanged)="onDateRangeChanged($event)" required></my-date-range-picker>
+         <my-date-range-picker name="mydaterange" [options]="dateRangeOptions"
+                               [(ngModel)]="dateRangeModel"
+                               (dateRangeChanged)="onDateRangeChanged($event)" required>
+         </my-date-range-picker>
   
     `,
     styles: [
