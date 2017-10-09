@@ -25,7 +25,7 @@ export class MonitoringEffects {
         .ofType(monitoringActions.LOAD_DATA)
         //.delay(2000)
         .map((action: monitoringActions.LoadData) => action.payload)
-        .mergeMap(payload => this.measurementService.getMeasurements(payload.from, payload.to))
+        .mergeMap(payload => this.measurementService.loadMeasurements(payload.from, payload.to))
         .map(measurements => new monitoringActions.LoadDataSuccess(measurements))
         .catch((err) => of(new monitoringActions.LoadDataFail({ error: err.message })));
 }
