@@ -70,3 +70,45 @@ export const lineChartOptions = (isResponsive = false, showLines = true, showLeg
     }
 };
 
+export const pointChartOptions = {
+    responsive: false,
+    title: {
+        display: false
+    },
+    legend: {
+        display: false
+    },
+    elements: {
+        point: {
+            //pointStyle: 'sun'
+        }
+    },
+    scales: {
+        xAxes: [{
+            id: 'axis1',
+            display: true,
+            position: 'top',
+            gridLines: {
+                display: true,
+                offsetGridLines: true
+
+            },
+            ticks: {
+                display: false
+            }
+        }],
+        yAxes: [{
+            display: false,
+            gridLines: {
+                display: true,
+                offsetGridLines: true
+
+            },
+            ticks: {
+                display: false
+            }
+        }]
+    }
+};
+
+

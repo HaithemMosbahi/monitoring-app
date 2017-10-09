@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-period',
+    selector: 'app-time-frame',
     template: `
  
     <div>
@@ -27,7 +27,7 @@ import * as moment from 'moment';
     ]
 })
 
-export class PeriodComponent implements OnInit {
+export class TimeFrameComponent implements OnInit {
 
     @Input() fromDate: any;
     @Input() toDate: any;

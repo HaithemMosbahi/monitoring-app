@@ -12,46 +12,64 @@ import * as moment from 'moment';
 @Component({
     selector: 'app-monitoring-container',
     template: `
-    <app-period [fromDate]="fromDate$ | async" [toDate]="toDate$ | async" (dateRangeChanged)="dateRangeChanged($event)" ></app-period>
-    <div *ngIf="measurements$ | async as measurements" class="row">
-    <div class="col-md-6">
-      <div >
-      <app-weight-chart [measurements]="measurements.weight" ></app-weight-chart>          
-      </div>
-    </div>
-    <div class="col-md-6">
-    <div >
-    <app-temperature-chart [measurements]="measurements.temperature" ></app-temperature-chart>          
-    </div>
-  </div>
+        <app-time-frame [fromDate]="fromDate$ | async"
+                        [toDate]="toDate$ | async"
+                        (dateRangeChanged)="dateRangeChanged($event)">
+        </app-time-frame>
+        <div *ngIf="measurements$ | async as measurements" class="row">
+            <div class="col-md-6">
+                <div>
+                    <app-line-chart [showLabels]="true" title="Weight"
+                                 subTitle="(Kg)" legendTitle="Weight"
+                                 [measurements]="measurements.weight" >
+                    </app-line-chart>          
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <app-line-chart  title="Body Temperature"
+                                subTitle="(°C)" legendTitle="Temperature"
+                                [measurements]="measurements.temperature">
+                    </app-line-chart>          
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <app-line-chart  title="Pain Level" subTitle="(1-10)"
+                                legendTitle="pain level" 
+                                [measurements]="measurements.pain" >
+                    </app-line-chart>         
+                 </div>
+             </div>
+             <div class="col-md-6">
+                <div>
+                     <app-point-chart title="Diarrhea"
+                                subTitle="(Bristol-Stool-Scale Type)" 
+                                legendTitle="Diarrhea" [measurements]="measurements.diarrhea">
+                    </app-point-chart>          
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <app-point-chart title="Further symptoms" subTitle=""
+                                 legendTitle="Further symptoms"
+                                 [measurements]="measurements.symptoms">
+                    </app-point-chart>          
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <app-point-chart title="Medication compliance" subTitle=""
+                                 legendTitle="Medication"
+                                [measurements]="measurements.medication">
+                    </app-point-chart>          
+                </div>
+            </div>
   
-  <div class="col-md-6">
-  <div >
-  <app-pain-chart [measurements]="measurements.pain" ></app-pain-chart>          
-  </div> </div>
-
-  <div class="col-md-6">
-  <div >
-  <app-diarrhea-chart [data]="measurements.diarrhea" ></app-diarrhea-chart>          
-  </div>
-</div>
-
-<div class="col-md-6">
-<div >
-<app-symptoms-chart [data]="measurements.symptoms" ></app-symptoms-chart>          
-</div>
-</div>
-
-  <div class="col-md-6">
-  <div >
-  <app-medication-chart [data]="measurements.medication" ></app-medication-chart>          
-  </div>
-</div>
-  
-    </div>
-    <md-progress-spinner *ngIf="loading$ | async" color="primary" mode="indeterminate" value="50">
-    </md-progress-spinner>
-
+        </div>
+        <md-progress-spinner *ngIf="loading$ | async"
+                             color="primary" mode="indeterminate" value="50">
+        </md-progress-spinner>
     
     `,
     styles: [

@@ -1,17 +1,13 @@
+import { PointChartComponent } from './components/point-chart.component';
+import { LineChartComponent } from './components/line-chart.component';
 import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
-import { PeriodComponent } from './components/period.component';
-import { PainChartComponent } from './components/pain-chart.component';
-import { SymptomsChartComponent } from './components/symptoms-chart.component';
-import { TemperatureChartComponent } from './components/temperature-chart.component';
-import { DiarrheaChartComponent } from './components/diarrhea.component';
-import { MedicationChartComponent } from './components/medication.component';
+import { TimeFrameComponent } from './components/time-frame.component';
 import { ChartsModule } from 'ng2-charts';
 import { MonitoringEffects } from './effects/monitoring.effects';
 import { MonitoringContainer } from './containers/monitoring-container.component';
 import { MonitoringRoutingModule } from './monitoring-routing.module';
 import { MonitoringRootComponent } from './containers/monitoring-root.component';
-import { WeightChartComponent } from './components/weight-chart.component';
 import { SharedModule } from './../shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -40,9 +36,7 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
 
   ],
   providers: [],
-  declarations: [MonitoringRootComponent,
-    MonitoringContainer, WeightChartComponent, MedicationChartComponent, DiarrheaChartComponent,
-    PainChartComponent, TemperatureChartComponent, SymptomsChartComponent,
-    PeriodComponent]
+  declarations: [MonitoringRootComponent, LineChartComponent, PointChartComponent,
+    MonitoringContainer, TimeFrameComponent]
 })
 export class MonitoringModule { }
