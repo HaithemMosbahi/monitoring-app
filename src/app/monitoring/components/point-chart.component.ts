@@ -7,7 +7,9 @@ import * as utils from './chart-utils';
     template: `
             <md-grid-list cols="5" rowHeight="100px">
                 <md-grid-tile colspan="1">
-                    <span> <b>{{title}} </b> <br/> {{subTitle}} </span>                
+                    <div> <b>{{title}} </b> <br/> 
+                        <span *showItBootstrap="['xl','lg','sm','md']"> {{subTitle}} </span>
+                    </div>              
                 </md-grid-tile>
                 <md-grid-tile colspan="3">
                     <canvas baseChart width="800" height="100"
@@ -17,7 +19,7 @@ import * as utils from './chart-utils';
                         [chartType]="lineChartType">
                     </canvas>
                 </md-grid-tile>
-                <md-grid-tile colspan="1">
+                <md-grid-tile *showItBootstrap="['xl','lg','md']" colspan="1">
                     {{status}}
                 </md-grid-tile>
             </md-grid-list>

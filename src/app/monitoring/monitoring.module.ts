@@ -20,12 +20,15 @@ import { reducers } from './reducers';
 // Component for date range selection 
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 
+import { ResponsiveModule } from 'ng2-responsive'
+
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     HttpModule,
+    ResponsiveModule,
     MonitoringRoutingModule,
     StoreModule.forFeature('monitoring', reducers),
     EffectsModule.forFeature([MonitoringEffects]),
