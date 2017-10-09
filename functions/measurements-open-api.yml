@@ -5,7 +5,7 @@ info:
   license:
     name: MIT
 host: https://us-central1-health-monitoring-c4a62.cloudfunctions.net/app
-basePath: /app
+basePath: /
 schemes:
   - http
 consumes:
@@ -36,8 +36,75 @@ paths:
           description: The end date 
       responses:
         "200":
-          description: Expected response to a valid request
-          schema:
-          default:
-            description: unexpected error
-            schema:
+          description: A JSON object containing measurements as keys along with their values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  weight:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
+                  temperature:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
+                  pain:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
+                  medication:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
+                  symptoms: 
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
+                  diarrhea:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        description: A hashmap with date as a key and the data related to that date as the value.
+                      status:
+                        type: object
+                        proporties:
+                          message:
+                            type: string
