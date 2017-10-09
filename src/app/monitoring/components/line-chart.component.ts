@@ -59,6 +59,7 @@ export class LineChartComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.lineChartOptions = utils.lineChartOptions(false, true, false, this.showLabels);
         // shows DD/MM as label => this can be configured by adding an input for label format
+        // Also we could use long format for big screens, and short format for mobile & ipad screens
         this.lineChartLabels = Object.keys(this.measurements.data).map(date => date.substr(0, 5));
         this.lineChartData = [
             {
@@ -73,7 +74,7 @@ export class LineChartComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['measurements']) {
             if (!changes.measurements.isFirstChange()) {
-                this.lineChartLabels = Object.keys(changes.measurements.currentValue.data).map(date => date.substr(0, 2));
+                this.lineChartLabels = Object.keys(changes.measurements.currentValue.data).map(date => date.substr(0, 5));
                 this.lineChartData[0].data = Object.values(changes.measurements.currentValue.data);
 
             }
